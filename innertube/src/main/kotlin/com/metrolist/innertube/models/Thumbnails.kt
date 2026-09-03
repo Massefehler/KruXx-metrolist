@@ -4,7 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Thumbnails(
-    val thumbnails: List<Thumbnail>,
+    // YouTube Music occasionally returns an empty `thumbnail` object for
+    // library entries. Treat that as "no artwork" instead of rejecting the
+    // complete browse response.
+    val thumbnails: List<Thumbnail> = emptyList(),
 )
 
 @Serializable
